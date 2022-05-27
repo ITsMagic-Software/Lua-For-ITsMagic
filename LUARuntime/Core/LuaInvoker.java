@@ -13,6 +13,7 @@ public class LuaInvoker {
     public static Object invoke(String func, Globals globals){
         return invoke(func, null, globals);
     }
+
     public static Object invoke(String func, ArrayList parameters, Globals globals) {
         if (parameters != null && parameters.size() > 0) {
             LuaValue[] values = new LuaValue[parameters.size()];
