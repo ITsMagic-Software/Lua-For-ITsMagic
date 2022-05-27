@@ -68,6 +68,7 @@ public class LuaExecutor extends Component {
 
     // LOAD SCRIPT DATA
     private void loadScript(){
+<<<<<<< HEAD
         if(entireScript != null){
             //Script already loaded, return
             return;   
@@ -116,6 +117,58 @@ public class LuaExecutor extends Component {
                 loadedScriptPath = "";
             }
         }
+=======
+       if(entireScript != null){
+          //Script already loaded, return
+           return;   
+       }
+       
+       if(!validateScriptFile()){
+           error = "Invalid lua file";
+           loadedScriptPath = "";
+           return; 
+       }
+     
+       scriptText = null;
+       try{
+          scriptText = FileLoader.loadTextFromFile(scriptFile);
+          if (variablesChecked) {
+              if (refreshVars) {
+                  replaceVars();
+                  refreshVars = false;
+              }
+              scriptText = scriptText.replace("publicvar", "").intern();
+          }
+       } catch (Exception e){
+         error = e.toString();
+         Console.log("Lua file loading error:" + error);
+         loadedScriptPath = "";
+         return;
+       }
+       
+       if (variablesChecked) {
+       try{
+          loadedScriptPath = scriptFile.getFilePath();
+          
+          globals = LUAJUtils.getGlobals();
+          entireScript = globals.load(scriptText);
+          error = null;
+          
+          /// Initialize the script globals
+          /// This is necessary, or the Invoke function wont work
+          entireScript.call();
+          globals.set("myObject", CoerceJavaToLua.coerce(myObject));
+          globals.set("myTransform",CoerceJavaToLua.coerce(myTransform));
+          globals.set("myPhysics",CoerceJavaToLua.coerce(myPhysics));
+          pFileTools = new PFileTools();
+          globals.set("pFileTools", CoerceJavaToLua.coerce(pFileTools));
+       } catch (Exception e){
+         error = e.toString();
+          Console.log("Lua compiller error:" + error);
+          loadedScriptPath = "";
+       }
+       }
+>>>>>>> upstream/master
     }
 
     //// SHOW SCRIPT NAME ON COMPONENT TITTLE
