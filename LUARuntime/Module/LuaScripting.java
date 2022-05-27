@@ -1,23 +1,19 @@
 package JAVARuntime;
 
-// Useful imports
-import java.util.*;
-import java.text.*;
-import java.net.*;
-import java.math.*;
-import java.io.*;
-import java.nio.*;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import android.view.ViewGroup.LayoutParams;
-import android.view.*;
-import android.view.ViewGroup.*;
 import android.view.Gravity;
+import android.view.View;
 
 import java.io.IOException;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.ArrayList;
 
 import android.text.TextWatcher;
 import java.lang.CharSequence;
@@ -30,9 +26,6 @@ import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 
-/**
- * @Author 
- */
 public class LuaScripting extends Module {
 
     public boolean validated;

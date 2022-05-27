@@ -17,23 +17,12 @@ public class LuaScriptCreator extends Module {
         super.setModuleConfigs(moduleConfig); // Set a extra config class in to the module
     }
 
-    /// Called when the user enter the module
-    public void onStart() {
+    public void onStart() {}
+    public void onStop() {}
 
-    }
-
-    /// Called when the user exits the module
-    public void onStop() {
-
-    }
-
-    /// Called when a file is opened with the module
     public void onOpenFile(PFile pFile) {
         Console.log("Creating script at " + pFile.getFilePath());
     }
 
-    /// Called when a object is selected while using your module
-    public void onObjectSelected(SpatialObject object) {
-
-    }
+    public void onObjectSelected(SpatialObject object) {}
 }

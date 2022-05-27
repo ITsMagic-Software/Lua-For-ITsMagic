@@ -1,9 +1,9 @@
 package JAVARuntime;
 
-import java.util.ArrayList;
 import android.text.Editable;
+import java.util.ArrayList;
 
-public class LuaEditor extends TextScriptingExtension { 
+public class LuaEditor extends TextScriptingExtension {
 
     private LuaEditorTheme theme = new LuaEditorTheme();
     private LuaStyler styler = new LuaStyler();
@@ -25,7 +25,7 @@ public class LuaEditor extends TextScriptingExtension {
     private String line = "";
 
     @Override
-    public void init(){
+    public void init() {
         // set configs and themes
         super.setTheme(theme.get());
         super.setStyler(styler);
@@ -33,7 +33,7 @@ public class LuaEditor extends TextScriptingExtension {
     }
 
     @Override
-    public TextScriptingExtension.LineTip getTipForLine(int line){
+    public TextScriptingExtension.LineTip getTipForLine(int line) {
         // return if theres a error or warning on this line
         // options:
         // LineTip.Error
@@ -43,30 +43,30 @@ public class LuaEditor extends TextScriptingExtension {
     }
 
     @Override
-    public void replaceScript(File file){
+    public void replaceScript(File file) {
         // save the loaded script, if present
         // then load the new one
-        if(hasScript()){
-            if(saveScript()){
+        if(hasScript()) {
+            if(saveScript()) {
                 openScript(file);
             } else {
                 // failed to save
             }
-        } else{
+        } else {
             openScript(file);
         }
     }
 
     @Override
-    public void openScript(File file){
+    public void openScript(File file) {
         // load the script
         loadedFile = file;
 
         // you can use FileLoader.loadTextFromFile(file);
         String code = "";
-        try{
+        try {
             code = FileLoader.loadTextFromFile(file);
-        } catch(Exception e){
+        } catch(Exception e) {
             // handle
             errorLog(e);
         }
@@ -78,10 +78,10 @@ public class LuaEditor extends TextScriptingExtension {
     }
 
     @Override
-    public void onClose(){
+    public void onClose() {
         // module will be dettached
         // save the loaded script and release
-        if(saveScript()){
+        if(saveScript()) {
             loadedFile = null;
         }
         try {
@@ -94,23 +94,22 @@ public class LuaEditor extends TextScriptingExtension {
     }
 
     @Override
-    public boolean saveScript(){
+    public boolean saveScript() {
         // save script if present
         // return true if saved
-        if(hasScript()){
+        if(hasScript()) {
             try{
                 FileLoader.exportTextToFile(getText(), loadedFile);
                 return true;
-            } catch (Exception e){
+            } catch (Exception e) {
                 return false;
             }
         }
         return false;
     }
 
-
     @Override
-    public String getTipTextForLine(int line){
+    public String getTipTextForLine(int line) {
         // return message text which will be
         // displayed on the popup dialog
         // when user taps on the error line number
@@ -119,12 +118,12 @@ public class LuaEditor extends TextScriptingExtension {
     }
 
     @Override
-    public boolean hasScript(){
+    public boolean hasScript() {
         return loadedFile != null;
     }
 
     @Override
-    public boolean supportFile(File file){
+    public boolean supportFile(File file) {
         // check if file is supported
         Console.log("aboslute:" + file.getAbsolutePath());
         if(file.getAbsolutePath().endsWith(".lua")){
@@ -138,13 +137,11 @@ public class LuaEditor extends TextScriptingExtension {
     }
 
     @Override
-    public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
-
-    }
+    public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
 
     @Override
     public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-        line = charSequence.subSequence(start,start+count).toString();
+        line = charSequence.subSequence(start, start + count).toString();
     }
 
     @Override

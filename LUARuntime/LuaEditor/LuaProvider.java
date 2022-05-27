@@ -52,9 +52,9 @@ public class LuaProvider extends TextScriptingProvider {
     }
 
     private void collectNames(List<TextScriptingSuggestion> list) {
-        List<JCompillerClass> classes = JCompiller.getAllClasses();
+        List<JClass> classes = JCompiler.getAllClasses();
         for (int i = 0; i < classes.size(); i++) {
-            JCompillerClass current = (JCompillerClass) classes.get(i);
+            JClass current = (JClass) classes.get(i);
             String name = current.getName();
             TextScriptingSuggestion suggestion = new TextScriptingSuggestion(null);
             suggestion.text = name;

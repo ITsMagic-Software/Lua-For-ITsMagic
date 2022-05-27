@@ -4,7 +4,6 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
-import java.util.Map2;
 import java.util.ArrayList;
 
 /**
