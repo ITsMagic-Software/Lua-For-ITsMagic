@@ -1,21 +1,11 @@
 package JAVARuntime;
 
-// Useful imports
-import java.util.*;
-import java.text.*;
-import java.net.*;
-import java.math.*;
-import java.io.*;
-import java.nio.*;
-
+import java.util.ArrayList;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
-/**
- * @Author 
-*/
 public class LuaInvoker { 
 
     //// FUNCTION USED TO INVOKE FUNCTIONS AT LUA SCRIPTS

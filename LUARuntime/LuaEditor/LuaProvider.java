@@ -1,43 +1,35 @@
 package JAVARuntime;
 
-// Useful imports
-import java.util.*;
-import java.text.*;
-import java.net.*;
-import java.math.*;
-import java.io.*;
-import java.nio.*;
+import java.util.List;
+import java.util.LinkedList;
 
-/**
- * @Author 
-*/
 public class LuaProvider extends TextScriptingProvider {
-    
+
     // the provider is responsible to give word suggestions
     // to give a suggestion we need to add it to a list at getAll() method
     // all suggestions returned at getAll() method, will display at screen
-    
+
     // the correct way to implement this
     // is to store all your words and possible suggestions in a list
     // like script attributes and methods
     // while processLine is being called
-    
+
     // the last call of processLine will be the current line
     // which user is editing
     // so you can use this to create suggestions specific for that line
-    
+
     // then you return all suggestions when getAll is called
     // only matching suggestions will be displayed
-    
+
     @Override
     public List<TextScriptingSuggestion> getAll() {
         // return the suggestions list
-        
+
         // example (dont create suggestions everytime this method is called, cache it)
         TextScriptingSuggestion suggestion = new TextScriptingSuggestion(null);
         suggestion.text = "test";
         suggestion.returnType = "";
-        
+
         List<TextScriptingSuggestion> list = new LinkedList();
         list.add(suggestion);
         collectNames(list);
@@ -58,7 +50,7 @@ public class LuaProvider extends TextScriptingProvider {
     public void clearLines() {
         // called to notify you to clear all your local data
     }
-    
+
     private void collectNames(List<TextScriptingSuggestion> list) {
         List<JCompillerClass> classes = JCompiller.getAllClasses();
         for (int i = 0; i < classes.size(); i++) {
