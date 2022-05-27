@@ -113,6 +113,8 @@ public class LuaExecutor extends Component {
           /// This is necessary, or the Invoke function wont work
           entireScript.call();
           globals.set("myObject", CoerceJavaToLua.coerce(myObject));
+          globals.set("myTransform",CoerceJavaToLua.coerce(myTransform));
+          globals.set("myPhysics",CoerceJavaToLua.coerce(myPhysics));
           pFileTools = new PFileTools();
           globals.set("pFileTools", CoerceJavaToLua.coerce(pFileTools));
        } catch (Exception e){
