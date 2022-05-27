@@ -22,7 +22,7 @@ public class LuaStyler extends  TextScriptingStyler {
    
    private String[] operators = {"function", "end", "in", "not", "or", "and","if", "for", "while", "break", "continue", "else", "elseif","do",":"};
    private String[] math = {"1","2","3","4","5","6","6","7","8","9","0","+","-","*","/"};
-   private String[] types = {"myObject"};
+   private String[] types = {"myObject","myPhysics","myTransform"};
    public static String[] methods = new String[0];
    
     @Override
@@ -55,7 +55,7 @@ public class LuaStyler extends  TextScriptingStyler {
     private void colorText(String source, String[] set, String color,TextScriptingTheme theme,List<TextScriptingSyntaxHighlightSpan> highlightSpans) {
         Color c = new Color(255,255,255);
         if (color.equals("functions"))
-        c = theme.keywordColor;
+        c = new Color("#ff5555");
         else if (color.equals("math"))
         c = theme.numberColor;
         else if (color.equals("types"))
@@ -89,7 +89,7 @@ public class LuaStyler extends  TextScriptingStyler {
     }
     
     private void colorMethodsRegex(String source,TextScriptingTheme theme,List<TextScriptingSyntaxHighlightSpan> highlightSpans) {
-        Color c = new Color(128,0,255);
+        Color c = new Color("8be9fd");
         Pattern p = Pattern.compile("\\:.*?\\(");
         Matcher m = p.matcher(source);
         while (m.find()) {
@@ -111,7 +111,7 @@ public class LuaStyler extends  TextScriptingStyler {
     }
     
     private void colorMethodsSeparatedRegex(String source,TextScriptingTheme theme,List<TextScriptingSyntaxHighlightSpan> highlightSpans) {
-        Color c = new Color(128,0,255);
+        Color c = new Color("#8be9fd");
         Pattern p = Pattern.compile("\\ .*?\\(");
         Matcher m = p.matcher(source);
         while (m.find()) {
@@ -139,7 +139,7 @@ public class LuaStyler extends  TextScriptingStyler {
     }
     
     private void colorStringsRegex(String source,TextScriptingTheme theme,List<TextScriptingSyntaxHighlightSpan> highlightSpans) {
-        Color c = new Color(0,100,0);
+        Color c = new Color("#50fa7b");
         Pattern p = Pattern.compile("\\\".*?\\\"");
         Matcher m = p.matcher(source);
         while (m.find()) {
