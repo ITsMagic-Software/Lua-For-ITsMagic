@@ -4,12 +4,8 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
-import java.util.Map2;
 import java.util.ArrayList;
 
-/**
- * @Author SpeakerFish (Discord community)
- */
 public class LuaExecutor extends Component { 
 
     public PFile scriptFile = new PFile();
@@ -33,7 +29,6 @@ public class LuaExecutor extends Component {
 
     private String loadedScriptPath = "";
 
-    /// Run only once
     public void start() {
         variablesChecked = true;
         refreshVars = true;
@@ -45,14 +40,12 @@ public class LuaExecutor extends Component {
         }
     }
 
-    /// Repeat every frame
     public void repeat() {
-        if(entireScript != null){
+        if(entireScript != null) {
             LuaInvoker.invoke("update", globals);
         }
     }
 
-    /// Repeat every frame when component or object is disabled
     public void disabledRepeat() {
         loadScript();
 
@@ -68,7 +61,6 @@ public class LuaExecutor extends Component {
 
     // LOAD SCRIPT DATA
     private void loadScript(){
-<<<<<<< HEAD
         if(entireScript != null){
             //Script already loaded, return
             return;   
@@ -109,6 +101,8 @@ public class LuaExecutor extends Component {
                 /// This is necessary, or the Invoke function wont work
                 entireScript.call();
                 globals.set("myObject", CoerceJavaToLua.coerce(myObject));
+                globals.set("myTransform",CoerceJavaToLua.coerce(myTransform));
+                globals.set("myPhysics",CoerceJavaToLua.coerce(myPhysics));
                 pFileTools = new PFileTools();
                 globals.set("pFileTools", CoerceJavaToLua.coerce(pFileTools));
             } catch (Exception e){
@@ -117,58 +111,6 @@ public class LuaExecutor extends Component {
                 loadedScriptPath = "";
             }
         }
-=======
-       if(entireScript != null){
-          //Script already loaded, return
-           return;   
-       }
-       
-       if(!validateScriptFile()){
-           error = "Invalid lua file";
-           loadedScriptPath = "";
-           return; 
-       }
-     
-       scriptText = null;
-       try{
-          scriptText = FileLoader.loadTextFromFile(scriptFile);
-          if (variablesChecked) {
-              if (refreshVars) {
-                  replaceVars();
-                  refreshVars = false;
-              }
-              scriptText = scriptText.replace("publicvar", "").intern();
-          }
-       } catch (Exception e){
-         error = e.toString();
-         Console.log("Lua file loading error:" + error);
-         loadedScriptPath = "";
-         return;
-       }
-       
-       if (variablesChecked) {
-       try{
-          loadedScriptPath = scriptFile.getFilePath();
-          
-          globals = LUAJUtils.getGlobals();
-          entireScript = globals.load(scriptText);
-          error = null;
-          
-          /// Initialize the script globals
-          /// This is necessary, or the Invoke function wont work
-          entireScript.call();
-          globals.set("myObject", CoerceJavaToLua.coerce(myObject));
-          globals.set("myTransform",CoerceJavaToLua.coerce(myTransform));
-          globals.set("myPhysics",CoerceJavaToLua.coerce(myPhysics));
-          pFileTools = new PFileTools();
-          globals.set("pFileTools", CoerceJavaToLua.coerce(pFileTools));
-       } catch (Exception e){
-         error = e.toString();
-          Console.log("Lua compiller error:" + error);
-          loadedScriptPath = "";
-       }
-       }
->>>>>>> upstream/master
     }
 
     //// SHOW SCRIPT NAME ON COMPONENT TITTLE
@@ -348,4 +290,5 @@ public class LuaExecutor extends Component {
         variablesChecked = false;
         onScriptAttached ();
     }
+
 }
