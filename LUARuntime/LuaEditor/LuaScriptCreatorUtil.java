@@ -12,7 +12,7 @@ public class LuaScriptCreatorUtil extends FilesPanelDirectoryMenu {
 
     @Override
     public void onClick(File folder) {
-        createScriptDialog = new InputDialog("Create new Lua script", "MyLuaScript", "OK", "Cancel", new InputDialogListener() {
+        createScriptDialog = new InputDialog("Create new Lua script", "MyLuaScript", "Cancel", "OK", new InputDialogListener() {
             public void onFinish(String name) {
                 File folder = new File(Directories.getProjectFolder() + "Files/LuaScripts/");
                 folder.mkdirs();
